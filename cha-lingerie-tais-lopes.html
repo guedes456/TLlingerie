@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chá de Lingerie — Tais Lopes</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --gold-pale: #f5e6b8;
+    --black: #0a0a0a;
+    --dark: #111111;
+    --dark2: #1a1a1a;
+    --white: #faf8f4;
+    --text-muted: #888;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(201,168,76,0.07) 0%, transparent 60%);
+  }
+
+  .hero-ornament {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+    margin: 0 auto 2rem;
+    opacity: 0;
+    animation: fadeDown 1s ease 0.3s forwards;
+  }
+
+  .hero-tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    opacity: 0;
+    animation: fadeUp 1s ease 0.7s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255,255,255,0.5);
+    margin-top: 1rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2.5rem auto;
+    width: 200px;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.1s forwards;
+  }
+
+  .hero-divider::before,
+  .hero-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  .hero-divider span {
+    color: var(--gold);
+    font-size: 1rem;
+  }
+
+  .hero-cta {
+    opacity: 0;
+    animation: fadeUp 1s ease 1.3s forwards;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.9rem 2.5rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+    z-index: -1;
+  }
+
+  .btn:hover {
+    color: var(--black);
+  }
+
+  .btn:hover::before {
+    transform: translateX(0);
+  }
+
+  /* SECTION BASE */
+  section {
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  /* INTRO */
+  .intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .intro { grid-template-columns: 1fr; gap: 3rem; }
+  }
+
+  .intro-text p {
+    color: rgba(255,255,255,0.6);
+    line-height: 1.9;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .intro-visual {
+    position: relative;
+  }
+
+  .intro-box {
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 3rem 2.5rem;
+    position: relative;
+  }
+
+  .intro-box::before {
+    content: '✦';
+    position: absolute;
+    top: -0.7rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--black);
+    padding: 0 1rem;
+    color: var(--gold);
+    font-size: 0.8rem;
+  }
+
+  .intro-box-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .intro-box ul {
+    list-style: none;
+  }
+
+  .intro-box ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+  }
+
+  .intro-box ul li:last-child { border-bottom: none; }
+
+  .intro-box ul li::before {
+    content: '—';
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  /* PLANS SECTION */
+  .plans-section {
+    background: var(--dark);
+    max-width: 100%;
+    padding: 6rem 2rem;
+  }
+
+  .plans-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .plans-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .plans-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+  }
+
+  .plan-card {
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: border-color 0.4s ease;
+    background: var(--black);
+  }
+
+  .plan-card:hover {
+    border-color: rgba(201,168,76,0.6);
+  }
+
+  .plan-card.featured {
+    border-color: var(--gold);
+    background: linear-gradient(135deg, #111 0%, #1a1500 100%);
+  }
+
+  .plan-badge {
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--black);
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 0.3rem 1rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .plan-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .plan-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 0.3rem;
+  }
+
+  .plan-guests {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+  }
+
+  .plan-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0.3;
+    margin-bottom: 2rem;
+  }
+
+  .plan-features {
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+
+  .plan-features li {
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+    padding: 0.55rem 0;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.4;
+  }
+
+  .plan-features li .icon {
+    color: var(--gold);
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    margin-top: 0.15rem;
+  }
+
+  .plan-note {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.35);
+    font-style: italic;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* HOW IT WORKS */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+  }
+
+  @media (max-width: 768px) {
+    .steps { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .steps { grid-template-columns: 1fr; }
+  }
+
+  .step {
+    text-align: center;
+    position: relative;
+  }
+
+  .step-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-style: italic;
+    color: rgba(201,168,76,0.15);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    color: var(--gold-light);
+  }
+
+  .step p {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+  }
+
+  /* DIFFERENTIALS */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 600px) {
+    .diff-grid { grid-template-columns: 1fr; }
+  }
+
+  .diff-item {
+    padding: 2rem;
+    border-left: 2px solid rgba(201,168,76,0.3);
+    transition: border-color 0.3s ease;
+  }
+
+  .diff-item:hover {
+    border-color: var(--gold);
+  }
+
+  .diff-item h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--gold-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .diff-item p {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+  }
+
+  /* CTA FINAL */
+  .cta-section {
+    background: var(--dark);
+    max-width: 100%;
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .cta-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta-section .section-title {
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+  .whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2.5rem;
+    background: var(--gold);
+    color: var(--black);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .whatsapp-btn:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+
+  footer p {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.2em;
+  }
+
+  footer span {
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* SCROLL INDICATOR */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.8s forwards;
+  }
+
+  .scroll-hint span {
+    font-size: 0.55rem;
+    letter-spacing: 0.4em;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-ornament"></div>
+  <p class="hero-tag">Tais Lopes Lingerie & Beach — apresenta</p>
+  <h1>Chá de<br><em>Lingerie</em></h1>
+  <p class="hero-sub">A boutique vai até você</p>
+  <div class="hero-divider"><span>✦</span></div>
+  <div class="hero-cta">
+    <a href="#planos" class="btn">Conhecer os planos</a>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section>
+  <div class="intro reveal">
+    <div class="intro-text">
+      <p class="section-label">O conceito</p>
+      <h2 class="section-title">Um momento <em>inesquecível</em> para a noiva</h2>
+      <p>Imagine celebrar o chá de lingerie sem precisar se preocupar com nada. Nós levamos tudo até você — exposição completa, consultora especializada e uma experiência de boutique no conforto da sua casa ou espaço escolhido.</p>
+      <p>As convidadas escolhem e compram na hora. A noiva monta o enxoval dos sonhos. Você cuida apenas de aproveitar cada momento.</p>
+    </div>
+    <div class="intro-visual">
+      <div class="intro-box">
+        <p class="intro-box-title">O que levamos até você</p>
+        <ul>
+          <li>Exposição completa do nosso estoque selecionado</li>
+          <li>Consultora presente durante todo o evento</li>
+          <li>Catálogo com todos os modelos disponíveis</li>
+          <li>A noiva escolhe previamente suas peças favoritas</li>
+          <li>As convidadas compram e já levam na hora</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANS -->
+<div class="plans-section" id="planos">
+  <div class="plans-inner">
+    <div class="plans-header reveal">
+      <p class="section-label">Nossos planos</p>
+      <h2 class="section-title">Escolha a experiência <em>ideal</em></h2>
+      <p style="color:rgba(255,255,255,0.4); font-size:0.85rem; margin-top:0.5rem;">Todos os planos incluem consultora, exposição do estoque e atendimento personalizado</p>
+    </div>
+
+    <div class="plans-grid reveal">
+
+      <!-- BÁSICO -->
+      <div class="plan-card">
+        <p class="plan-name">Plano 01</p>
+        <h3 class="plan-title">Chá Encantado</h3>
+        <p class="plan-guests">Até 15 convidadas</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><span class="icon">✦</span> Araras com exposição completa do estoque</li>
+          <li><span class="icon">✦</span> Catálogo físico e digital</li>
+          <li><span class="icon">✦</span> Consultora especializada</li>
+          <li><span class="icon">✦</span> Escolha prévia das peças pela noiva</li>
+          <li><span class="icon">✦</span> Compra e entrega no evento</li>
+        </ul>
+        <p class="plan-note">Mínimo de compras no evento</p>
+      </div>
+
+      <!-- MÉDIO -->
+      <div class="plan-card featured">
+        <div class="plan-badge">Mais escolhido</div>
+        <p class="plan-name">Plano 02</p>
+        <h3 class="plan-title">Chá Especial</h3>
+        <p class="plan-guests">Até 20 convidadas</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><span class="icon">✦</span> Tudo do Plano Encantado</li>
+          <li><span class="icon">✦</span> Decoração temática completa</li>
+          <li><span class="icon">✦</span> Balões, flores e toalhas decorativas</li>
+          <li><span class="icon">✦</span> Mesa de guloseimas</li>
+          <li><span class="icon">✦</span> Brinde exclusivo para a noiva</li>
+        </ul>
+        <p class="plan-note">Mínimo de compras no evento</p>
+      </div>
+
+      <!-- COMPLETO -->
+      <div class="plan-card">
+        <p class="plan-name">Plano 03</p>
+        <h3 class="plan-title">Chá dos Sonhos</h3>
+        <p class="plan-guests">Até 30 convidadas</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><span class="icon">✦</span> Tudo do Plano Especial</li>
+          <li><span class="icon">✦</span> Mesa de drinks e sucos temáticos</li>
+          <li><span class="icon">✦</span> Decoração com identidade da noiva</li>
+          <li><span class="icon">✦</span> Embalagem presenteável em cada peça</li>
+          <li><span class="icon">✦</span> Peça surpresa de presente para a noiva</li>
+        </ul>
+        <p class="plan-note">Mínimo de compras no evento</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- COMO FUNCIONA -->
+<section>
+  <div class="reveal">
+    <p class="section-label">Passo a passo</p>
+    <h2 class="section-title">Como <em>funciona</em></h2>
+  </div>
+  <div class="steps reveal">
+    <div class="step">
+      <div class="step-number">01</div>
+      <h3 class="step-title">Entre em contato</h3>
+      <p>Fale com a gente pelo WhatsApp e escolha o plano ideal para o seu evento.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">02</div>
+      <h3 class="step-title">A noiva escolhe</h3>
+      <p>Antes do evento, a noiva seleciona as peças favoritas para guiar as convidadas.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">03</div>
+      <h3 class="step-title">A gente chega</h3>
+      <p>Nossa equipe monta tudo no local. Você não precisa se preocupar com nada.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">04</div>
+      <h3 class="step-title">Celebre e compre</h3>
+      <p>As convidadas escolhem, compram e já levam. Memória e enxoval garantidos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<div class="plans-section">
+  <div class="plans-inner">
+    <div class="reveal">
+      <p class="section-label">Por que a Tais Lopes</p>
+      <h2 class="section-title">Nossos <em>diferenciais</em></h2>
+    </div>
+    <div class="diff-grid reveal">
+      <div class="diff-item">
+        <h3>Estoque variado no evento</h3>
+        <p>Levamos peças em todos os tamanhos, estilos e faixas de preço — para que cada convidada encontre algo especial.</p>
+      </div>
+      <div class="diff-item">
+        <h3>Consultora especializada</h3>
+        <p>Nossa consultora está presente durante todo o evento para ajudar cada pessoa a escolher a peça perfeita.</p>
+      </div>
+      <div class="diff-item">
+        <h3>Sem estresse para a noiva</h3>
+        <p>Nós cuidamos de toda a estrutura. A noiva só precisa curtir o momento com as pessoas que ama.</p>
+      </div>
+      <div class="diff-item">
+        <h3>Compra na hora</h3>
+        <p>As convidadas saem do evento com a peça em mãos, embalada e pronta — sem precisar acessar links ou fazer transferências depois.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA FINAL -->
+<div class="cta-section">
+  <div class="cta-inner reveal">
+    <p class="section-label">Vamos conversar</p>
+    <h2 class="section-title">Agende o seu <em>chá</em></h2>
+    <p>Entre em contato agora pelo WhatsApp e garanta a data do seu evento. Nossa equipe está pronta para criar uma experiência inesquecível para você e suas convidadas.</p>
+    <a href="https://wa.me/5547999999999" class="whatsapp-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Falar no WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>Tais Lopes Lingerie & Beach</span> — Todos os direitos reservados</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
